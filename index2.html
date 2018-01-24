@@ -1,0 +1,127 @@
+<!-- to-do: fix css of search bar and drop-down menu, comb through provided javascript file (adjust icon behavior and credit appearance)  -->
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+	<head>
+		<title>TEST PAGE</title>
+	</head>
+
+	<!-- FONTS -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+	<body>
+		<style>
+		body {
+			margin-left: 100px;
+			width: 100%;
+			font-family: "Montserrat", sans-serif !important;
+		}
+
+		#input-styling-address {
+			margin: 25px 0px;
+			width: 100%;
+		}
+
+		#input-styling-address input {
+			font-family: "Montserrat", sans-serif !important;
+		  	display: inline-block;
+		  	border: 1px solid #d9d9d9;
+		  	border-radius: 12px;
+		  	background: #ffffff;
+		  	padding: 1em 0 1em 45px;
+		  	margin-top: -16px;
+		  	width: 100%;
+		}
+
+		#input-styling-address input:focus, #input-styling-address input:active {
+		  	outline: 0;
+		  	border-color: #aaaaaa;
+		  	background: #ffffff;
+		}
+
+		#input-styling-address .ap-nostyle-dropdown-menu {
+		  	box-shadow: none;
+		  	border: 1px solid #dadada;
+		  	border-radius: 0;
+		  	background: #fff;
+		  	width: 100%;
+		}
+
+		#input-styling-address .ap-nostyle-input-icon {
+			margin-top: -16px;
+		  	display: block;
+		  	position: absolute;
+		  	background: none;
+		  	border: none;
+		}
+
+		#input-styling-address .algolia-places-nostyle { width: 50%; }
+		#input-styling-address .ap-nostyle-icon-pin { left: 5px;top: 10px; }
+		#input-styling-address .ap-nostyle-icon-clear { right: 5px;top: 15px }
+		#input-styling-address input:hover { border-color: silver; }
+		#input-styling-address input::placeholder { color: #aaaaaa; }
+		#input-styling-address .ap-nostyle-suggestion { border-bottom: 1px solid #efefef; }
+
+		#search {
+			display: inline-block;
+			margin-left: 50px;
+			padding: 5px 7px;
+			border: 1px solid lightgray;
+			border-radius: 10px;
+			background-color: white;
+		}
+
+		#search:hover {
+			background-color: lightgray;
+		}
+
+		#map {
+			height: 500px;
+			width: 75%;
+		}
+
+		#logo {
+			margin-bottom: -25px;
+			width: 200px;
+		}
+
+		#weather {
+			margin-top: 10px;
+			margin-bottom: 10px;
+			width: 75%;
+		}
+
+		.weatherbox {
+			display: inline-block;
+			margin: 10px;
+			padding: 20px;
+			width: 200px;
+			height: 300px;
+			border: 1px solid lightgray;
+			border-radius: 15px;
+		}
+		</style>
+
+		<div id="searchquery"><img id="logo" alt="rove" src="assets/images/rove-dark.png"></div>
+
+		<!-- REFERENCE: https://community.algolia.com/places/examples.html#disable-styling -->
+		<div id="input-styling-address">
+		  <input type="text" id="search-input" placeholder="Where would you like to go?">
+		  <button id="search"><img alt="GO" src="assets/images/search.png"></button>
+		</div>
+
+		<div id="map"></div>
+
+		<div id="location"></div>
+		<div id="weather"></div>
+		<div id="language"></div>
+		<div id="currency"></div>
+
+		<!-- JAVASCRIPT AND JQUERY -->
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/places.js@1.4.18"></script>
+		<script src="assets/script/karascript.js"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeAKjHmJnKiguHVIoSB-YaqXkapD4g_4M&callback=googleMapsJavascript"></script>
+	</body>
+</html>
