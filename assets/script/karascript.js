@@ -1,3 +1,36 @@
+// ------------------------------------ DATABASE
+
+// initializing firebase
+var config = {
+    apiKey: "AIzaSyChlr_DL3tTGVq2VXN2E15TnaK6Yh2TzkU",
+    authDomain: "project1-480ca.firebaseapp.com",
+    databaseURL: "https://project1-480ca.firebaseio.com",
+    projectId: "project1-480ca",
+    storageBucket: "project1-480ca.appspot.com",
+    messagingSenderId: "791645920378"
+  };
+
+firebase.initializeApp(config);
+var database = firebase.database();
+
+// displays all saved searches as buttons
+database.ref().on("value", function(snapshot) {
+    // clears contents of savedsearches div to avoid creating duplicate buttons
+    $("#savedsearches").empty();
+
+    // pulls saved searches array from database
+    savedsearches = snapshot.val().savedsearches;
+
+    for (var i = 0; i < savedsearches.length; i++) {
+        // creates a button and adds its class and text
+        var a = $("<button>").addClass("searchbutton").text(savedsearches[i]);
+        // appends button to list
+        $("#savedsearches").append(a);
+    }
+});
+
+// ------------------------------------ DECLARATIONS, DEFAULTS, AND MISCELLANEOUS
+
 // declare global variables
 var usersearch = [];
 var city = "";
@@ -6,6 +39,11 @@ var currencies = [];
 var languages = [];
 var latitude = 41.8781;     // Chicago, IL
 var longitude = -87.6298;   // Chicago, IL
+var search = "";
+var savedsearches = [];
+
+// initially hide option to save search
+$("#save").hide();
 
 // CORS
 jQuery.ajaxPrefilter(function(options) {
@@ -14,17 +52,61 @@ jQuery.ajaxPrefilter(function(options) {
     }
 });
 
-// grabbing user input from search bar
+// ------------------------------------ ON-CLICK EVENTS (top to bottom)
+
+// grabs user input from search bar
 $("#search").on("click", function(event) {
+    // grabs user input and trims excess spaces
+    search = $("#search-input").val().trim();
+
+    // run search function
+    resetThenSearch();
+
+    // show save button
+    $("#save").show();
+});
+
+// saves search
+$("#save").on("click", function(event) {
+    // add search to array of saved searches
+    savedsearches.push(search);
+
+    // send saved searches to firebase
+    database.ref().set({
+        savedsearches: savedsearches
+    });
+});
+
+// clears saved searches
+$("#clear").on("click", function(event) {
+    // add search to array of saved searches
+    savedsearches = [];
+
+    // send saved searches to firebase
+    database.ref().set({
+        savedsearches: savedsearches
+    });
+});
+
+// reexecutes search when saved search button is clicked
+$("#savedsearches").on("click", ".searchbutton", function() {
+    // setting the search query
+    search = $(this).text();
+
+    // run search function
+    resetThenSearch();
+});
+
+// ------------------------------------ MISCELLANEOUS FUNCTIONS
+
+// resets variables then performs search
+function resetThenSearch() {
     // reset variables
     usersearch = [];
     city = "";
     country = "";
     currencies = [];
     languages = [];
-
-    // grabs user input and trims excess spaces
-    var search = $("#search-input").val().trim();
 
     // splitting the string
     usersearch = search.split(", ");
@@ -37,7 +119,9 @@ $("#search").on("click", function(event) {
     // runs APIs
     googleMapsGeocoding();
     restCountries();
-});
+}
+
+// ------------------------------------ API FUNCTIONS
 
 // Algolia Places API
 // autocomplete for search bar
@@ -53,6 +137,9 @@ $("#search").on("click", function(event) {
 // Dark Sky API
 // obtain and display weather information
 function darkSky() {
+    // remove any previous weather information
+    $("#weather").empty();
+
     var darkSky_key = "54db5805ebfe845b99818a813105725e";
     var darkSky_queryURL = "https://api.darksky.net/forecast/" + darkSky_key + "/" + latitude + "," + longitude;
 
