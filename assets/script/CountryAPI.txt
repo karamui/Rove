@@ -1,0 +1,14 @@
+// CountryAPI
+function countryAPI() {
+    var countryapi_queryURL = "http://countryapi.gear.host/v1/Country/getCountries?pName=" + country;
+
+    $.ajax({
+        url: countryapi_queryURL,
+        method: "GET"
+    }).done(function(response) {
+        console.log(response); // for debugging
+
+        $("#language").html("Languages: " + response.Response[0].NativeLanguage);
+        $("#currency").html("Currency: " + response.Response[0].CurrencyCode + " (" + response.Response[0].CurrencySymbol + ", " + response.Response[0].CurrencyName + ")");
+    });
+}

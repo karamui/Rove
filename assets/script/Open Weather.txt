@@ -1,0 +1,24 @@
+// Open Weather API
+function openWeather() {
+    var openWeather_key = "e06c4250d791932773c758f7aef86c64";
+    var openWeather_queryURL = "http://api.openweathermap.org/data/2.5/weather?APPID=" + openWeather_key + "&q=" + city + "," + country;
+
+    $.ajax({
+        url: openWeather_queryURL,
+        method: "GET"
+    }).done(function(response) {
+        console.log(response); // for debugging
+
+        // coordinates
+        latitude = response.coord.lat;
+        longitude = response.coord.lon;
+        initMap();
+
+        // temperature
+        mincelsius = Math.round(((response.main.temp_min - 273.15) * 10) / 10);
+        maxcelsius = Math.round(((response.main.temp_max - 273.15) * 10) / 10);
+        minfahrenheit = Math.round(((response.main.temp_min * 9/5 - 459.67) * 10) / 10);
+        maxfahrenheit = Math.round(((response.main.temp_max * 9/5 - 459.67) * 10) / 10);
+        $("#weather").html("Minimum Temperature: " + mincelsius + ("C / ") + minfahrenheit + "F" + "<br>Maximum Temperature: " + maxcelsius + ("C / ") + maxfahrenheit + "F");
+    });
+}
