@@ -24,8 +24,13 @@ database.ref().on("value", function(snapshot) {
     for (var i = 0; i < savedsearches.length; i++) {
         // creates a button and adds its class and text
         var a = $("<button>").addClass("searchbutton").text(savedsearches[i]);
+        
+        // creates a close button and adds its class, icon, and index
+        var close = $("<button><img class='closeicon' src='assets/images/close.png'></button>");
+        close.addClass("close").attr("index", i);
+
         // appends button to list
-        $("#savedsearches").append(a);
+        $("#savedsearches").append(a).append(close);
     }
 });
 
@@ -95,6 +100,19 @@ $("#savedsearches").on("click", ".searchbutton", function() {
 
     // run search function
     resetThenSearch();
+});
+
+
+// reexecutes search when saved search button is clicked
+$("#savedsearches").on("click", ".close", function() {
+    // removing the selected item
+    var index = $(this).attr("index");
+    savedsearches.splice(index, 1);
+
+    // send saved searches to firebase
+    database.ref().set({
+        savedsearches: savedsearches
+    });    
 });
 
 // ------------------------------------ MISCELLANEOUS FUNCTIONS
