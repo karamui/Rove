@@ -21,11 +21,16 @@ database.ref().on("value", function(snapshot) {
     // pulls saved searches array from database
     savedsearches = snapshot.val().savedsearches;
 
-    for (var i = 0; i < savedsearches.length; i++) {
+    for (var i = 1; i < savedsearches.length; i++) {
         // creates a button and adds its class and text
         var a = $("<button>").addClass("searchbutton").text(savedsearches[i]);
+        
+        // creates a close button and adds its class, icon, and index
+        var close = $("<button><img class='closeicon' src='assets/images/close.png'></button>");
+        close.addClass("close").attr("index", i);
+
         // appends button to list
-        $("#savedsearches").append(a);
+        $("#savedsearches").append(a).append(close);
     }
 });
 
@@ -40,7 +45,7 @@ var languages = [];
 var latitude = 41.8781;     // Chicago, IL
 var longitude = -87.6298;   // Chicago, IL
 var search = "";
-var savedsearches = [];
+var savedsearches = [""];
 
 // initially hide option to save search
 $("#save").hide();
@@ -80,7 +85,7 @@ $("#save").on("click", function(event) {
 // clears saved searches
 $("#clear").on("click", function(event) {
     // add search to array of saved searches
-    savedsearches = [];
+    savedsearches = [""];
 
     // send saved searches to firebase
     database.ref().set({
@@ -95,6 +100,19 @@ $("#savedsearches").on("click", ".searchbutton", function() {
 
     // run search function
     resetThenSearch();
+});
+
+
+// reexecutes search when saved search button is clicked
+$("#savedsearches").on("click", ".close", function() {
+    // removing the selected item
+    var index = $(this).attr("index");
+    savedsearches.splice(index, 1);
+
+    // send saved searches to firebase
+    database.ref().set({
+        savedsearches: savedsearches
+    });    
 });
 
 // ------------------------------------ MISCELLANEOUS FUNCTIONS
@@ -219,6 +237,9 @@ function googleMapsGeocoding() {
         longitude = response.results[0].geometry.location.lng;
         googleMapsJavascript();
 
+        // search for nearby places
+        googlePlaces();
+
         // obtain weather information
         darkSky();
     });
@@ -308,6 +329,42 @@ function googleMapsJavascript() {
         position: loc,
         map: map,
         icon: "assets/images/location.png"
+    });
+}
+
+// Google Places API
+// search for nearby attractions
+function googlePlaces() {
+    var googlePlaces_key = "AIzaSyCDcpIf0iLXO9lC6dAQUWAuMyIJNpgFV7w";
+    var googlePlaces_queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=" + googlePlaces_key + "&location=" + latitude + "," + longitude + "&radius=8047&rankby=prominence&type=point_of_interest";
+
+    // attractions
+    $.ajax({
+        url: googlePlaces_queryURL,
+        method: "GET"
+    }).done(function(response) {
+        console.log(response); // for debugging
+    });
+
+    // accomodations
+    var googlePlaces_queryURL2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=" + googlePlaces_key + "&location=" + latitude + "," + longitude + "&radius=8047&rankby=prominence&type=lodging";
+
+    $.ajax({
+        url: googlePlaces_queryURL2,
+        method: "GET"
+    }).done(function(response) {
+        console.log(response); // for debugging
+
+        for (var i = 0; i < 10; i++) {
+            var div = $("<div>");
+            div.addClass("hotelbox");
+
+            var icon = $("<img class='hotelicon' alt='hotelicon' src='" + response.results[i].icon + "'>");
+            var name = response.results[i].name;
+
+            div.append(icon).append("<p><b>" + name + "</b></p>");
+            $("#hotels").append(div);    
+        }
     });
 }
 
