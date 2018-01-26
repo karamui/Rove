@@ -237,6 +237,9 @@ function googleMapsGeocoding() {
         longitude = response.results[0].geometry.location.lng;
         googleMapsJavascript();
 
+        // search for nearby places
+        googlePlaces();
+
         // obtain weather information
         darkSky();
     });
@@ -326,6 +329,42 @@ function googleMapsJavascript() {
         position: loc,
         map: map,
         icon: "assets/images/location.png"
+    });
+}
+
+// Google Places API
+// search for nearby attractions
+function googlePlaces() {
+    var googlePlaces_key = "AIzaSyCDcpIf0iLXO9lC6dAQUWAuMyIJNpgFV7w";
+    var googlePlaces_queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=" + googlePlaces_key + "&location=" + latitude + "," + longitude + "&radius=8047&rankby=prominence&type=point_of_interest";
+
+    // attractions
+    $.ajax({
+        url: googlePlaces_queryURL,
+        method: "GET"
+    }).done(function(response) {
+        console.log(response); // for debugging
+    });
+
+    // accomodations
+    var googlePlaces_queryURL2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=" + googlePlaces_key + "&location=" + latitude + "," + longitude + "&radius=8047&rankby=prominence&type=lodging";
+
+    $.ajax({
+        url: googlePlaces_queryURL2,
+        method: "GET"
+    }).done(function(response) {
+        console.log(response); // for debugging
+
+        for (var i = 0; i < 10; i++) {
+            var div = $("<div>");
+            div.addClass("hotelbox");
+
+            var icon = $("<img class='hotelicon' alt='hotelicon' src='" + response.results[i].icon + "'>");
+            var name = response.results[i].name;
+
+            div.append(icon).append("<p><b>" + name + "</b></p>");
+            $("#hotels").append(div);    
+        }
     });
 }
 
