@@ -21,7 +21,7 @@ database.ref().on("value", function(snapshot) {
     // pulls saved searches array from database
     savedsearches = snapshot.val().savedsearches;
 
-    for (var i = 0; i < savedsearches.length; i++) {
+    for (var i = 1; i < savedsearches.length; i++) {
         // creates a button and adds its class and text
         var a = $("<button>").addClass("searchbutton").text(savedsearches[i]);
         
@@ -45,7 +45,7 @@ var languages = [];
 var latitude = 41.8781;     // Chicago, IL
 var longitude = -87.6298;   // Chicago, IL
 var search = "";
-var savedsearches = [];
+var savedsearches = [""];
 
 // initially hide option to save search
 $("#save").hide();
@@ -85,7 +85,7 @@ $("#save").on("click", function(event) {
 // clears saved searches
 $("#clear").on("click", function(event) {
     // add search to array of saved searches
-    savedsearches = [];
+    savedsearches = [""];
 
     // send saved searches to firebase
     database.ref().set({
