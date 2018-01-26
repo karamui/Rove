@@ -72,8 +72,21 @@
 			background-color: white;
 		}
 
-		#search:hover {
+		#search:hover, #save:hover, #clear:hover, .searchbutton:hover {
 			background-color: lightgray;
+		}
+
+		#save, #clear {
+			display: inline-block;
+			margin-left: 10px;
+			margin-top: -15px;
+			padding: 10px 15px;
+			border: 1px solid lightgray;
+			border-radius: 10px;
+			background-color: white;
+			font-family: "Montserrat", sans-serif !important;
+			font-weight: bold;
+			text-transform: uppercase;
 		}
 
 		#map {
@@ -101,6 +114,19 @@
 			border: 1px solid lightgray;
 			border-radius: 15px;
 		}
+
+		.searchbutton {
+			display: inline-block;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			padding: 10px 15px;
+			border: 1px solid lightgray;
+			border-radius: 10px;
+			background-color: white;
+			font-family: "Montserrat", sans-serif !important;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
 		</style>
 
 		<div id="searchquery"><img id="logo" alt="rove" src="assets/images/rove-dark.png"></div>
@@ -108,8 +134,10 @@
 		<!-- REFERENCE: https://community.algolia.com/places/examples.html#disable-styling -->
 		<div id="input-styling-address">
 		  <input type="text" id="search-input" placeholder="Where would you like to go?">
-		  <button id="search"><img alt="GO" src="assets/images/search.png"></button>
+		  <button id="search"><img alt="GO" src="assets/images/search.png"></button><button id="save">save search</button><button id="clear">clear searches</button>
 		</div>
+
+		<div id="savedsearches"></div>
 
 		<div id="map"></div>
 
@@ -120,6 +148,7 @@
 
 		<!-- JAVASCRIPT AND JQUERY -->
 		<script src="https://code.jquery.com/jquery.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/places.js@1.4.18"></script>
 		<script src="assets/script/karascript.js"></script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeAKjHmJnKiguHVIoSB-YaqXkapD4g_4M&callback=googleMapsJavascript"></script>
