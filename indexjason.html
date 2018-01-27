@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Rove</title>
+
+    <!-- Material Icon CDN -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Materialize CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+      
+      main {
+        flex: 1 0 auto;
+      }
+
+      #forms {
+        background-color: rgb(237, 243, 238);
+      }
+      h1 {
+        text-align: center
+      }
+      .dropdown-button, #dropdown1, .btn  {
+        background-color: rgba(172, 96, 9, 0.932);}
+        
+        .jumbotron {
+          background-image: url("https://cdn.pixabay.com/photo/2017/07/27/00/46/fantasy-2543658_960_720.jpg");
+          background-color: #cccccc;
+          background-size: cover;
+          height: 400px;
+      }
+
+      * {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+    float: left;
+    padding: 10px;
+    height: 200px; /* Should be removed. Only for demonstration */
+}
+
+.right {
+  float: right 
+}
+
+.left {
+  width: 25%;
+}
+
+.right {
+  width: 75%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+.left {
+  float:left;
+}
+    </style>
+  </head>
+    <body>
+ 
+    <div class="jumbotron">
+    <!-- Dropdown Trigger -->
+    <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Rover</a>
+    <!-- Dropdown Structure -->
+    <ul id='dropdown1' class='dropdown-content'>
+      <li><a href="#!">one</a></li>
+      <li><a href="#!">two</a></li>
+      <li class="divider"></li>
+      <li><a href="#!">three</a></li>
+    </ul>
+
+
+      <h1 id="centered">Rove</h1>
+          <form class="example" id = "forms" action="/action_page.php" style="margin:auto;max-width:300px">
+            <input type="text" placeholder="Where to.." name="search2">
+            
+          </form>
+          <div class="row">
+          <div class="column"></div>
+          <div class="column"></div>
+          </div>
+        </div>
+
+<div class="column right #ff5252 red accent-2;">
+<div class="card #ffab91 deep-orange lighten-3">
+<div class="row content">
+<h3>Details</h3>
+<p>Some text..</p>
+  </div>
+
+  <div class="row" id="left">
+  <div class="column left #ff5252 red accent-2;">
+
+    <h4>Chicago</h4>
+    <div class="container-fluid">
+      <div class="row content">
+        <div class="col-sm-3 sidenav">
+          <ul class="nav nav-pills nav-stacked">
+         <div class="card #ffab91 deep-orange lighten-3">
+            <li class="active"><a href="#section1">Information</a></li>
+            <li><a href="#section2">Location</a></li>
+            <li><a href="#section3">Weather</a></li>
+            <li><a href="#section3">Languages</a></li>
+            <li><a href="#section3">Currency</a></li>
+            <li><a href="#section3">Alerts</a></li>
+            <li><a href="#section3">News</a></li>
+            <li class="active"><a href="#section2">Attractions</a></li>
+            <li><a href="#section3">Top Attractions</a></li>
+            <li><a href="#section4">Upcoming Events</a></li>
+            <li><a href="#section4">Tours</a></li>
+            <li class="active"><a href="#section3">Accomodations</a></li>
+            <li class="active"><a href="#section4">Food</a></li>
+            <li class="active"><a href="#section5">Transportation</a></li>
+            <li><a href="#section2">Public Transportation</a></li>
+            <li><a href="#section3">Taxis & Uber</a></li>
+            <li><a href="#section3">Rentals</a></li>
+            <li><a href="#section3">Parking & Traffic</a></li>
+            <li><a href="#section3">Routes</a></li>
+          </div>
+        </ul><br>
+</div>
+              <br>
+            </div>
+                  <a href="#">This is a link</a>
+                  <a href="#">This is a link</a>
+                </div>
+              </div>
+            </div>
+          </div>
+    <!-- jQuery CDN -->
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <!-- Materialize JS CDN -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script>
+      $("document").ready(function(){
+        $(".button-collapse").sideNav();
+      });
+    </script>
+  </body>
+</html>
