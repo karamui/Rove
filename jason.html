@@ -13,9 +13,7 @@
     <!-- Your custom styles -->
     <link rel=< link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Used as an example only to position the footer at the end of the page.
     You can delete these styles or move it to your custom css file -->
@@ -30,9 +28,7 @@
         flex: 1 0 auto;
     }
 
-    #forms {
-        
-    }
+    #forms {}
 
     h1 {
         text-align: center
@@ -41,7 +37,7 @@
     .dropdown-button,
     #dropdown1,
     .btn {
-        background-color: brown;
+        background-color: orange;
 
         float: right;
     }
@@ -50,151 +46,161 @@
         background-image: url("https://cdn.pixabay.com/photo/2017/11/25/12/34/hamburg-2976711_960_720.jpg");
         background-color: #cccccc;
         background-size: cover;
-        height: 500px;
-
+        height: 300px;
     }
 
-     * {
-            box-sizing: border-box;
+    * {
+        box-sizing: border-box;
 
-font-family: 'Montserrat'; font-size: 22px;
-        }
+        font-family: 'Montserrat';
+        font-size: 22px;
+    }
 
-        body {
-            margin: 0;
-        }
-        /* Create two unequal columns that floats next to each other */
+    body {
+        margin: 0;
+    }
+    /* Create two unequal columns that floats next to each other */
 
-        .column {
-            float: left;
-            padding: 10px;
-            height: 200px;
-            /* Should be removed. Only for demonstration */
-        }
-
-        .right {
-            float: right
-        }
-
-        .left {
-            width: 25%;
-            margin-top: 0px;
-        }
-
-        .right {
-            
-            display: inline;
-        }
-        /* Clear floats after the columns */
-
-        .row:after {
-            content: "";
-            display: table;
-            
-            clear: both;
-        }
+    .column {
+        float: left;
+        padding: 10px;
+        height: 200px;
+        /* Should be removed. Only for demonstration */
+    }
 
 
-        .floating-box {
-    display: inline-block;
-    width: 250px;
-    height: 175px;
-    margin: 10px;
-    border: 2px solid #73AD21;  
-}
+    .left {
+        width: 25%;
+        margin-top: 0px;
+    }
 
-.after-box {
-    border: 3px solid red; 
-}
-.white-text {
-  color: black;
-}
+    .row:after {
+        content: "";
+        display: table;
 
+        clear: both;
+    }
+
+
+    .floating-box {
+        display: inline-block;
+        width: 250px;
+        height: 175px;
+        margin: 10px;
+        border: 2px solid #73AD21;
+    }
+
+
+    div.btn-group {
+        text-align: center;
+    }
+
+    form.example input[type=text] {
+        padding: 10px;
+        font-size: 27px;
+        border: 1px solid orange;
+        float: left;
+        width: 80%;
+        background: limegreen;
+    }
+
+    form.example::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .button1 {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+    }
     </style>
 
-  <head>
-      <div class="jumbotron">
-        <!-- Dropdown Trigger -->
-        <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Rove</a>
-        <!-- Dropdown Structure -->
-        <ul id='dropdown1' class='dropdown-content'>
-            <li><a href="#!">one</a></li>
-            <li><a href="#!">two</a></li>
-            <li class="divider"></li>
-            <li><a href="#!">three</a></li>
-        </ul>
-        <div>Logo</div>
-    
-    <h1 id="centered">Rove</h1>
-    <form class="example" id="forms" action="/action_page.php" style="margin:auto;max-width:300px">
-        <input type="text" placeholder="Where to.." name="search2">
+    <head>
+        <div class="jumbotron">
+            <!-- Dropdown Trigger -->
+            <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Rove</a>
+            <!-- Dropdown Structure -->
+            <ul id='dropdown1' class='dropdown-content'>
+                <li><a href="#!">one</a></li>
+                <li><a href="#!">two</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">three</a></li>
+            </ul>
+            <div>Logo</div>
+            <h1 id="centered">Rove</h1>
+            </form>
+        </div>
+    </head>
 
-        <button class="button">-  Send - </button>
-<button class="button">-Clear- </button><button class="button class="#ff5252 red accent-2;">- Save - </button>
-    </form>
-  </div>
-        </head>
-        <body>
-            <div class="row" id="left">
-                <div class="column left">
-                    <div class="container-fluid">
-                        <div class="row content">
-                            <div class="col-sm-3 sidenav">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <div class="card #fffde7 yellow lighten-5">
-                                        <li class="active"><a href="#section1">Information</a></li>
-                                        <li><a href="#section2">Location</a></li>
-                                        <li><a href="#section3">Weather</a></li>
-                                        <li><a href="#section3">Languages</a></li>
-                                        <li><a href="#section3">Currency</a></li>
-                                        <li><a href="#section3">Alerts</a></li>
-                                        <li><a href="#section3">News</a></li>
-                                        <li class="active"><a href="#section2">Attractions</a></li>
-                                        <li><a href="#section3">Top Attractions</a></li>
-                                        <li><a href="#section4">Upcoming Events</a></li>
-                                        <li><a href="#section4">Tours</a></li>
-                                        <li class="active"><a href="#section3">Accomodations</a></li>
-                                        <li class="active"><a href="#section4">Food</a></li>
-                                        <li class="active"><a href="#section5">Transportation</a></li>
-                                        <li><a href="#section2">Public Transportation</a></li>
-                                        <li><a href="#section3">Taxis & Uber</a></li>
-                                        <li><a href="#section3">Rentals</a></li>
-                                        <li><a href="#section3">Parking & Traffic</a></li>
-                                        <li><a href="#section3">Routes</a></li>
-                                
-</div>
-</ul>
-</div></div></div></div>
-
-<div class="row">
-      <div class="col s12 m9">
-        <div class="card-panel #fb8c00 orange darken-1">
-          <span class="white-text">Card 1
+    <body>
+        <form class="example" style="margin:auto;max-width:300px">
+            <input type="text" placeholder="Where to...">
+        </form>
+        <div class="btn-group text-center">
+            <button type="button1" class="btn btn-primary">Send</button>
+            <button type="button1" class="btn btn-primary">Save</button>
+            <button type="button1" class="btn btn-primary">Clear</button>
+        </div>
+        <div class="row" id="left">
+            <div class="column left">
+                <div class="container-fluid">
+                    <div class="row content">
+                        <div class="col-sm-3 sidenav">
+                            <ul class="nav nav-pills nav-stacked">
+                                <div class="card #fffde7 yellow lighten-5">
+                                    <li class="active"><a href="#section1">Information</a></li>
+                                    <li><a href="#section2">Location</a></li>
+                                    <li><a href="#section3">Weather</a></li>
+                                    <li><a href="#section3">Languages</a></li>
+                                    <li><a href="#section3">Currency</a></li>
+                                    <li><a href="#section3">Alerts</a></li>
+                                    <li><a href="#section3">News</a></li>
+                                    <li class="active"><a href="#section2">Attractions</a></li>
+                                    <li><a href="#section3">Top Attractions</a></li>
+                                    <li><a href="#section4">Upcoming Events</a></li>
+                                    <li><a href="#section4">Tours</a></li>
+                                    <li class="active"><a href="#section3">Accomodations</a></li>
+                                    <li class="active"><a href="#section4">Food</a></li>
+                                    <li class="active"><a href="#section5">Transportation</a></li>
+                                    <li><a href="#section2">Public Transportation</a></li>
+                                    <li><a href="#section3">Taxis & Uber</a></li>
+                                    <li><a href="#section3">Rentals</a></li>
+                                    <li><a href="#section3">Parking & Traffic</a></li>
+                                    <li><a href="#section3">Routes</a></li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m9">
+                    <div class="card-panel #fb8c00 orange darken-1">
+                        <span ">Card 1
           </span>
         </div>
 
-        <div class="card-panel #fb8c00 orange darken-1">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+        <div class="card-panel #fb8c00 orange darken-1 ">
+          <span ">I am a very simple card. I am good at containing small bits of information.
+                        </span>
+                    </div>
+                    <div class="card-panel #bbdefb blue lighten-4">
+                        <span>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+          </span></div>
+                    <div class="card-panel #00bcd4 cyan">
+                        <span ">I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+          </span></div>
+<div class="card-panel #ff7043 deep-orange lighten-1 ">
+          <span >I am a very simple card. I am good at containing small bits of information.
           I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
           </span></div>
 
-<div class="card-panel #bbdefb blue lighten-4">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span></div>
-
-<div class="card-panel #00bcd4 cyan">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span></div>
-<div class="card-panel #ff7043 deep-orange lighten-1">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-          </span></div>
-
-<div class="card-panel teal">
-          <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+<div class="card-panel teal ">
+          <span >Card Example
           </span></div>
 
         </div>
@@ -203,12 +209,12 @@ font-family: 'Montserrat'; font-size: 22px;
                            
 </body>
 <!-- jQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js " integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=" anonymous "></script>
 <!-- Materialize JS CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js "></script>
 <script>
-$("document").ready(function() {
-    $(".button-collapse").sideNav();
+$("document ").ready(function() {
+    $(".button-collapse ").sideNav();
 });
 </script>
 </body>
