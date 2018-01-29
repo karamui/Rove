@@ -49,8 +49,8 @@ var city = "";
 var country = "";
 var currencies = [];
 var languages = [];
-var latitude = 41.8781;     // Chicago, IL
-var longitude = -87.6298;   // Chicago, IL
+var latitude = 41.8781;
+var longitude = -87.6298;
 var search = "Chicago, IL, United States of America";
 var savedsearches = [""];
 var cities = [""];
@@ -58,6 +58,12 @@ var countries = [""];
 
 // initially hide option to save search
 $("#save").hide();
+
+// load Chicago's information on start
+setTimeout(function() {
+    resetThenSearch();
+    $(".searchquery1").html("<img id='logo' class='img-responsive' alt='rove' src='assets/images/rove-white.png'>");
+}, 1000);
 
 // CORS
 jQuery.ajaxPrefilter(function(options) {
@@ -204,7 +210,7 @@ function darkSky() {
 
         for (var i = 0; i < response.daily.data.length; i++) {
             // create a new div for each day of the week
-            var div = $("<div class='col-xs-6 col-sm-6 col-md-3 col-lg-3'>");
+            var div = $("<div class='weatherdiv col-xs-6 col-sm-6 col-md-6 col-lg-3'>");
             var weatherbox = $("<div class='weatherbox'>");
             
             // obtaining weather information
@@ -253,7 +259,15 @@ function darkSky() {
             div.append(weatherbox);
             $("#weather").append(div);    
         }
+
+        // make height of weather divs equal in size
+        $(".weatherbox").matchHeight({byRow: false, property: "height"});
     });
+
+    // re-adjust height of weather divs (needed on page load)
+    setTimeout(function() {
+        $(".weatherbox").matchHeight({byRow: false, property: "height"});
+    }, 250);
 }
 
 // Google Maps Geocoding API
@@ -374,6 +388,8 @@ function googlePlaces() {
     var googlePlaces_key = "AIzaSyCDcpIf0iLXO9lC6dAQUWAuMyIJNpgFV7w";
     var googlePlaces_queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=" + googlePlaces_key + "&location=" + latitude + "," + longitude + "&radius=8047&rankby=prominence&type=point_of_interest";
 
+    $("#hotels").empty();
+
     // attractions
     $.ajax({
         url: googlePlaces_queryURL,
@@ -395,10 +411,9 @@ function googlePlaces() {
             var div = $("<div>");
             div.addClass("hotelbox");
 
-            var icon = $("<img class='hotelicon' alt='hotelicon' src='" + response.results[i].icon + "'>");
             var name = response.results[i].name;
 
-            div.append(icon).append("<p><b>" + name + "</b></p>");
+            div.append("<p><b>" + (i+1) + ".</b> " + name + "</p>");
             $("#hotels").append(div);    
         }
     });
@@ -422,7 +437,7 @@ function restCountries() {
 
         // convert language array to string and display it on page
         languages = languages.join(", ");
-        $("#language").html("<b>Language(s):</b> " + languages);
+        $("#language").html(languages);
 
         // add currencies to array
         for(var i = 0; i < response[0].currencies.length; i++) {
@@ -431,6 +446,6 @@ function restCountries() {
 
         // convert currency array to string and display it on page
         currencies = currencies.join(", ");
-        $("#currency").html("<b>Forms of currency:</b> " + currencies);
+        $("#currency").html(currencies);
     });
 }

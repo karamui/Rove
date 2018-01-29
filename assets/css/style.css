@@ -1,6 +1,8 @@
-/* ------------------------------------ GENERAL */
+/* ------------------------------------ GENERAL AND LAYOUT */
 
 body {
+	margin: 0px !important;
+	padding: 0px !important;
 	width: 100%;
 	font-family: "Montserrat", sans-serif !important;
 }
@@ -12,21 +14,139 @@ div.container-fluid {
 }
 
 div.container {
-	margin: 50px 25px;
+	margin: 50px auto;
 	width: 95%;
 }
 
 div.header {
 	margin: 0px;
-	padding: 0px;
+	padding: 15px;
 	max-height: 350px;
 	width: 100%;
-	background-color: red;
+	background-image: url("../images/chicago.jpg");
+	background-size: cover;
+	background-position: center center;
 }
 
 div.contents {
 	margin: 0px;
 }
+
+div.main {
+	margin: 0px 10px 25px 10px;
+	padding: 25px 50px;
+	background-color: #eeeeee;
+	border-radius: 15px;
+}
+
+img.img-responsive {
+	width: 100%;
+}
+
+/* ------------------------------------ HEADERS, TEXT, AND LINKS */
+
+h1 {
+	margin-top: 0px;
+	color: white;
+	font-size: 75px;
+	font-weight: bold;
+}
+
+h2 {
+	margin-top: 0px;
+	margin-bottom: 15px;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+h3 {
+	margin-top: 0px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+a.navlink {
+	display: block;
+	margin-left: 25px;
+	padding: 5px 0px;
+	color: black;
+}
+
+a.navlink:hover {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.mainlink {
+	margin-left: 0px;
+}
+
+/* ------------------------------------ SEARCH BAR */
+
+div.searchquery1 {
+	margin-bottom: 25px;
+	text-align: center;
+}
+
+div.searchquery2 {
+	margin-bottom: 10px;
+}
+
+.searchbar {
+	margin: 0px auto 50px auto;
+	width: 100%;
+}
+
+#input-styling-address {
+	width: 100%;
+	text-align: center;
+	font-family: "Montserrat", sans-serif !important;
+	font-size: 15px;
+}
+
+#input-styling-address input {
+  	display: inline-block;
+  	margin-top: -14px;
+  	border: 1px solid #d9d9d9;
+  	border-radius: 12px;
+  	background: #ffffff;
+  	padding: 1em 0 1em 45px;
+  	width: 100%;
+}
+
+#input-styling-address input:focus, #input-styling-address input:active {
+  	outline: 0;
+  	border-color: #aaaaaa;
+  	background: #ffffff;
+}
+
+#input-styling-address .ap-nostyle-dropdown-menu {
+  	box-shadow: none;
+  	border: 1px solid #dadada;
+  	border-radius: 12px;
+  	background: #fff;
+  	width: 100%;
+  	padding: 5px 10px;
+  	text-align: left;
+}
+
+#input-styling-address .ap-nostyle-input-icon {
+	margin-top: -8px;
+	margin-left: 5px;
+  	display: block;
+  	position: absolute;
+  	background: none;
+  	border: none;
+}
+
+#input-styling-address .algolia-places-nostyle { width: 50%; }
+#input-styling-address .ap-nostyle-icon-pin { left: 5px; top: 10px; }
+#input-styling-address .ap-nostyle-icon-clear { right: 10px; top: 10px }
+#input-styling-address input:hover { border-color: silver; }
+#input-styling-address input::placeholder { color: #aaaaaa; }
+#input-styling-address .ap-nostyle-suggestion { border-bottom: 1px solid #efefef; }
+
+/* ------------------------------------ SIDEBAR */
 
 div.sidebar1 {
 	margin: 0px 0px 25px 0px;
@@ -49,13 +169,6 @@ div.sidebar.affix {
 	width: 21.5%;
 }
 
-div.main {
-	margin: 0px 10px 25px 10px;
-	padding: 25px 50px;
-	background-color: #eeeeee;
-	border-radius: 15px;
-}
-
 img#minilogo {
 	padding: 10px 20px;
 	min-width: 100px;
@@ -66,130 +179,38 @@ img#logo {
 	max-width: 200px;
 }
 
-h1 {
-	margin-top: 0px;
-	color: white;
-	font-size: 75px;
-	font-weight: bold;
-}
-
-h2 {
-	margin-top: 0px;
-	margin-bottom: 15px;
-	font-size: 30px;
-	font-weight: bold;
-}
-
-h3 {
-	margin-top: 0px;
-	font-size: 20px;
-	font-weight: bold;
-}
-
-a {
-	display: block;
-	margin-left: 25px;
-	padding: 5px 0px;
-	color: black;
-}
-
-a:hover {
-	text-decoration: none;
-	font-weight: bold;
-	color: red;
-}
-
 div.sidebarspace {
 	height: 25px;
 }
 
-/* ------------------------------------ SEARCH BAR */
-
-div.searchquery1 {
-	margin-bottom: 25px;
-	text-align: center;
+div.sidebarspace2 {
+	height: 15px;
 }
-
-div.searchquery2 {
-	margin-bottom: 10px;
-}
-
-.searchbar {
-	margin: 0px auto 50px auto;
-	width: 100%;
-}
-
-#input-styling-address {
-	width: 100%;
-	text-align: center;
-}
-
-#input-styling-address input {
-	font-family: "Montserrat", sans-serif !important;
-  	display: inline-block;
-  	border: 1px solid #d9d9d9;
-  	border-radius: 12px;
-  	background: #ffffff;
-  	padding: 1em 0 1em 45px;
-  	margin-top: -16px;
-  	width: 100%;
-}
-
-#input-styling-address input:focus, #input-styling-address input:active {
-  	outline: 0;
-  	border-color: #aaaaaa;
-  	background: #ffffff;
-}
-
-#input-styling-address .ap-nostyle-dropdown-menu {
-  	box-shadow: none;
-  	border: 1px solid #dadada;
-  	border-radius: 12px;
-  	background: #fff;
-  	width: 100%;
-  	padding: 5px 10px;
-  	text-align: left;
-}
-
-#input-styling-address .ap-nostyle-input-icon {
-	margin-top: -16px;
-  	display: block;
-  	position: absolute;
-  	background: none;
-  	border: none;
-}
-
-#input-styling-address .algolia-places-nostyle { width: 50%; }
-#input-styling-address .ap-nostyle-icon-pin { left: 5px;top: 10px; }
-#input-styling-address .ap-nostyle-icon-clear { right: 5px;top: 15px }
-#input-styling-address input:hover { border-color: silver; }
-#input-styling-address input::placeholder { color: #aaaaaa; }
-#input-styling-address .ap-nostyle-suggestion { border-bottom: 1px solid #efefef; }
 
 /* ------------------------------------ SEARCH BUTTONS */
 
 #search {
 	display: inline-block;
-	margin-left: 10px;
+	margin-left: 5px;
 	padding: 10px;
-	border: 1px solid #eeeeee;
+	border: none;
 	border-radius: 10px;
 	background-color: white;
 }
 
 #search:hover, .searchbutton:hover {
-	background-color: #eeeeee;
+	background-color: #bbbbbb;
 }
 
 #save:hover, #clear:hover {
-	background-color: darkgray;
+	background-color: #bbbbbb;
 }
 
 #save, #clear {
 	display: inline-block;
 	margin: -10px 5px 10px 0px;
-	padding: 7px 10px;
-	border: 1px solid #dddddd;
+	padding: 8px 11px;
+	border: none;
 	border-radius: 10px;
 	background-color: black;
 	font-family: "Montserrat", sans-serif !important;
@@ -207,13 +228,14 @@ div.searchquery2 {
 	display: inline-block;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	padding: 7px 10px;
-	border: 1px solid #dddddd;
+	padding: 8px 11px;
+	border: none;
 	border-radius: 10px;
 	background-color: white;
 	font-family: "Montserrat", sans-serif !important;
 	font-weight: bold;
 	text-transform: uppercase;
+	text-align: left;
 	font-size: 10px;
 }
 
@@ -233,20 +255,64 @@ div.searchquery2 {
 
 /* ------------------------------------ WEATHER */
 
-#weather {
+#weather, #language, #currency, #hotels, #food  {
 	margin-bottom: 25px;
 	width: 100%;
 }
 
 .weatherbox {
-	min-height: 250px;
-	margin-bottom: 10px;
 	padding: 20px;
 	background-color: white;
 	border: 1px solid #eeeeee;
 	border-radius: 15px;
 }
 
+.weatherdiv {
+	margin-bottom: 15px;
+}
+
+.weatherdiv:last-child {
+	margin-bottom: 25px;
+}
+
 .weathericon {
 	padding: 10px;
+}
+
+/* ------------------------------------ MEDIA QUERIES */
+
+/* large devices <1200px */
+@media (max-width: 1199px) { 
+}
+
+/* medium devices <992px */
+@media (max-width: 991px) { 
+	div.sidebar.affix {
+		position: static;
+		top: auto;
+		width: auto;
+	}
+
+	h1 {
+		font-size: 60px;
+	}
+}
+
+/* small devices <768px */
+@media (max-width: 767px) { 
+	div.container {
+		width: 100%;
+	}
+
+	div.main {
+		margin: 0px;
+	}
+
+	h1 {
+		font-size: 50px;
+	}
+}
+
+/* tiny devices < 576px */
+@media (max-width: 575px) { 
 }
