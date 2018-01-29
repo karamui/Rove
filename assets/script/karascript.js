@@ -20,17 +20,24 @@ database.ref().on("value", function(snapshot) {
 
     // pulls saved searches array from database
     savedsearches = snapshot.val().savedsearches;
+    cities = snapshot.val().cities;
+    countries = snapshot.val().countries;
 
     for (var i = 1; i < savedsearches.length; i++) {
+        // creates a div for each search item
+        var div = $("<div class='searchitem'>");
+
         // creates a button and adds its class and text
-        var a = $("<button>").addClass("searchbutton").text(savedsearches[i]);
+        var a = $("<button>").addClass("searchbutton").text(cities[i] + ", " + countries[i]).attr("query", savedsearches[i]);
         
         // creates a close button and adds its class, icon, and index
-        var close = $("<button><img class='closeicon' src='assets/images/close.png'></button>");
-        close.addClass("close").attr("index", i);
+        var close = $("<img class='closeicon' src='assets/images/close.png'>");
+        close.attr("index", i);
+
+        div.append(close).append(a);
 
         // appends button to list
-        $("#savedsearches").append(a).append(close);
+        $("#savedsearches").append(div);
     }
 });
 
@@ -42,19 +49,40 @@ var city = "";
 var country = "";
 var currencies = [];
 var languages = [];
-var latitude = 41.8781;     // Chicago, IL
-var longitude = -87.6298;   // Chicago, IL
-var search = "";
+var latitude = 41.8781;
+var longitude = -87.6298;
+var search = "Chicago, IL, United States of America";
 var savedsearches = [""];
+var cities = [""];
+var countries = [""];
 
 // initially hide option to save search
 $("#save").hide();
+
+// load Chicago's information on start
+setTimeout(function() {
+    resetThenSearch();
+    $(".searchquery1").html("<img id='logo' class='img-responsive' alt='rove' src='assets/images/rove-white.png'>");
+}, 1000);
 
 // CORS
 jQuery.ajaxPrefilter(function(options) {
     if (options.crossDomain && jQuery.support.cors) {
         options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
     }
+});
+
+// creating fixed siderbar
+// REFERENCE: https://stackoverflow.com/questions/23081656/fixing-an-element-when-it-reaches-the-top-of-the-page
+var stickySidebar = $(".sidebar").offset().top;
+
+$(window).scroll(function() {  
+    if ($(window).scrollTop() > stickySidebar) {
+        $(".sidebar").addClass("affix");
+    }
+    else {
+        $(".sidebar").removeClass("affix");
+    }  
 });
 
 // ------------------------------------ ON-CLICK EVENTS (top to bottom)
@@ -75,10 +103,14 @@ $("#search").on("click", function(event) {
 $("#save").on("click", function(event) {
     // add search to array of saved searches
     savedsearches.push(search);
+    cities.push(city);
+    countries.push(country);
 
     // send saved searches to firebase
     database.ref().set({
-        savedsearches: savedsearches
+        savedsearches: savedsearches,
+        cities: cities,
+        countries: countries
     });
 });
 
@@ -86,17 +118,21 @@ $("#save").on("click", function(event) {
 $("#clear").on("click", function(event) {
     // add search to array of saved searches
     savedsearches = [""];
+    cities = [""];
+    countries = [""];
 
     // send saved searches to firebase
     database.ref().set({
-        savedsearches: savedsearches
+        savedsearches: savedsearches,
+        cities: cities,
+        countries: countries
     });
 });
 
 // reexecutes search when saved search button is clicked
 $("#savedsearches").on("click", ".searchbutton", function() {
     // setting the search query
-    search = $(this).text();
+    search = $(this).attr("query");
 
     // run search function
     resetThenSearch();
@@ -104,14 +140,18 @@ $("#savedsearches").on("click", ".searchbutton", function() {
 
 
 // reexecutes search when saved search button is clicked
-$("#savedsearches").on("click", ".close", function() {
+$("#savedsearches").on("click", ".closeicon", function() {
     // removing the selected item
     var index = $(this).attr("index");
     savedsearches.splice(index, 1);
+    cities.splice(index, 1);
+    countries.splice(index, 1);
 
     // send saved searches to firebase
     database.ref().set({
-        savedsearches: savedsearches
+        savedsearches: savedsearches,
+        cities: cities,
+        countries: countries
     });    
 });
 
@@ -132,7 +172,8 @@ function resetThenSearch() {
     country = usersearch[usersearch.length - 1];
 
     // displays location on page
-    $("#searchquery").html("<h1>" + city + "</h1>");
+    $(".searchquery1").html("<h1>" + city + "</h1>");
+    $(".searchquery2").html("<h2>" + city + "</h2>");
 
     // runs APIs
     googleMapsGeocoding();
@@ -169,8 +210,8 @@ function darkSky() {
 
         for (var i = 0; i < response.daily.data.length; i++) {
             // create a new div for each day of the week
-            var div = $("<div>");
-            div.addClass("weatherbox");
+            var div = $("<div class='weatherdiv col-xs-6 col-sm-6 col-md-6 col-lg-3'>");
+            var weatherbox = $("<div class='weatherbox'>");
             
             // obtaining weather information
             var summary = response.daily.data[i].summary;
@@ -206,18 +247,27 @@ function darkSky() {
 
             // display day heading
             if (i == 0) {
-                div.append("<p><b>TODAY</b></p>");
+                weatherbox.append("<p><b>TODAY</b></p>");
             } else if (i == 1) {
-                div.append("<p><b>TOMORROW</b></p>");
+                weatherbox.append("<p><b>TOMORROW</b></p>");
             } else {
-                div.append("<p><b>" + i + " DAYS LATER</b></p>");
+                weatherbox.append("<p><b>" + i + " DAYS LATER</b></p>");
             }
 
             // display weather information
-            div.append(icon).append("<p><b>Summary:</b> " + summary + "</p>").append("<p><b>High:</b> " + temphigh + "C</p>").append("<p><b>Low:</b> " + templow + "C</p>");
+            weatherbox.append(icon).append("<p>" + summary + "</p>").append("<p><b>High:</b> " + temphigh + "C</p>").append("<p><b>Low:</b> " + templow + "C</p>");
+            div.append(weatherbox);
             $("#weather").append(div);    
         }
+
+        // make height of weather divs equal in size
+        $(".weatherbox").matchHeight({byRow: false, property: "height"});
     });
+
+    // re-adjust height of weather divs (needed on page load)
+    setTimeout(function() {
+        $(".weatherbox").matchHeight({byRow: false, property: "height"});
+    }, 250);
 }
 
 // Google Maps Geocoding API
@@ -338,6 +388,8 @@ function googlePlaces() {
     var googlePlaces_key = "AIzaSyCDcpIf0iLXO9lC6dAQUWAuMyIJNpgFV7w";
     var googlePlaces_queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=" + googlePlaces_key + "&location=" + latitude + "," + longitude + "&radius=8047&rankby=prominence&type=point_of_interest";
 
+    $("#hotels").empty();
+
     // attractions
     $.ajax({
         url: googlePlaces_queryURL,
@@ -359,10 +411,9 @@ function googlePlaces() {
             var div = $("<div>");
             div.addClass("hotelbox");
 
-            var icon = $("<img class='hotelicon' alt='hotelicon' src='" + response.results[i].icon + "'>");
             var name = response.results[i].name;
 
-            div.append(icon).append("<p><b>" + name + "</b></p>");
+            div.append("<p><b>" + (i+1) + ".</b> " + name + "</p>");
             $("#hotels").append(div);    
         }
     });
@@ -386,7 +437,7 @@ function restCountries() {
 
         // convert language array to string and display it on page
         languages = languages.join(", ");
-        $("#language").html("<b>Language(s):</b> " + languages);
+        $("#language").html(languages);
 
         // add currencies to array
         for(var i = 0; i < response[0].currencies.length; i++) {
@@ -395,6 +446,6 @@ function restCountries() {
 
         // convert currency array to string and display it on page
         currencies = currencies.join(", ");
-        $("#currency").html("<b>Forms of currency:</b> " + currencies);
+        $("#currency").html(currencies);
     });
 }
