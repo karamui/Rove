@@ -262,6 +262,13 @@ function darkSky() {
             div.append(weatherbox);
             $("#weather").append(div);    
         }
+        var weatherAttribution = $("<p>");
+        var weatherAttributionLink = $("<a>");
+        weatherAttributionLink.attr("href", "https://darksky.net/dev");
+        weatherAttributionLink.text("Powered by Dark Sky API");
+        weatherAttribution.html(weatherAttributionLink);
+        $("#weather").append("<br>");
+        $("#weather").append(weatherAttributionLink);
 
         // make height of weather divs equal in size
         $(".weatherbox").matchHeight({byRow: false, property: "height"});
@@ -392,6 +399,8 @@ function googlePlaces() {
     var googlePlaces_queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=" + googlePlaces_key + "&location=" + latitude + "," + longitude + "&radius=8047&rankby=prominence&type=point_of_interest";
 
     $("#hotels").empty();
+    $("#attractions").empty();
+    $("#food").empty();
 
     // attractions
     var googlePlaces_key = "AIzaSyCDcpIf0iLXO9lC6dAQUWAuMyIJNpgFV7w";
@@ -412,6 +421,13 @@ function googlePlaces() {
             placeDiv.append(placeName);
             $("#attractions").append(placeDiv);
         }
+        var attractionsAttribution = $("<p>");
+        var attractionsAttributionLink = $("<a>");
+        attractionsAttributionLink.attr("href", "https://developers.google.com/places/");
+        attractionsAttributionLink.text("Powered by Google Places API");
+        attractionsAttribution.html(attractionsAttributionLink);
+        $("#attractions").append("<br>");
+        $("#attractions").append(attractionsAttributionLink);
     });
 
     // accomodations
@@ -432,6 +448,13 @@ function googlePlaces() {
             div.append("<p><b>" + (i+1) + ".</b> " + name + "</p>");
             $("#hotels").append(div);    
         }
+        var hotelAttribution = $("<p>");
+        var hotelAttributionLink = $("<a>");
+        hotelAttributionLink.attr("href", "https://developers.google.com/places/");
+        hotelAttributionLink.text("Powered by Google Places API");
+        hotelAttribution.html(hotelAttributionLink);
+        $("#hotels").append("<br>");
+        $("#hotels").append(hotelAttributionLink);
     });
 
     //restaurants
@@ -453,6 +476,13 @@ function googlePlaces() {
             restaurantDiv.append(restaurantName);
             $("#food").append(restaurantDiv);
         }
+        var foodAttribution = $("<p>");
+        var foodAttributionLink = $("<a>");
+        foodAttributionLink.attr("href", "https://developers.google.com/places/");
+        foodAttributionLink.text("Powered by Google Places API");
+        foodAttribution.html(foodAttributionLink);
+        $("#food").append("<br>");
+        $("#food").append(foodAttributionLink);
     });
 }
 
@@ -476,6 +506,14 @@ function restCountries() {
         // convert language array to string and display it on page
         languages = languages.join(", ");
         $("#language").html(languages);
+        var languageAttribution = $("<p>");
+        var languageAttributionLink = $("<a>");
+        languageAttributionLink.attr("href", "https://restcountries.eu/rest/v2/");
+        languageAttributionLink.text("Powered by REST Countries API");
+        languageAttribution.html(languageAttributionLink);
+        $("#language").append("<br>");
+        $("#language").append(languageAttributionLink);
+
 
         // add currencies to array
         for(var i = 0; i < response[0].currencies.length; i++) {
@@ -485,11 +523,19 @@ function restCountries() {
         // convert currency array to string and display it on page
         currencies = currencies.join(", ");
         $("#currency").html(currencies);
+        var currencyAttribution = $("<p>");
+        var currencyAttributionLink = $("<a>");
+        currencyAttributionLink.attr("href", "https://restcountries.eu/rest/v2/");
+        currencyAttributionLink.text("Powered by REST Countries API");
+        currencyAttribution.html(currencyAttributionLink);
+        $("#currency").append("<br>");
+        $("#currency").append(currencyAttributionLink);
 
         alpha2code = response[0].alpha2Code;
 
         var tugoApiKey = "pxzuppxje7r2hsu2w3mpnaza";
         var tugoRequestUrl = "https://api.tugo.com/v1/travelsafe/countries/" + alpha2code;
+        $("#alerts").empty();
 
         $.ajax({
             url: tugoRequestUrl,
@@ -505,6 +551,12 @@ function restCountries() {
             alertsDiv.append(alertsInfo);
             alertsDiv.append(alertsDetails);
             $("#alerts").append(alertsDiv);
+            var attribution = $("<p>");
+            var attributionLink = $("<a>");
+            attributionLink.attr("href", "http://developer.tugo.com/");
+            attributionLink.text("Powered by TuGo API");
+            attribution.html(attributionLink);
+            $("#alerts").append(attributionLink);
         });       
     });
 }
@@ -513,6 +565,7 @@ function getNews() {
     //finding related news articles
     var newsApiKey = "37341660916741f38faa605269e8554f"
     var newsUrl = 'https://newsapi.org/v2/everything?' + 'q=' + city + '&apiKey=' + newsApiKey + "&sources=abc-news,bbc-news,al-jazeera-english,le-monde,nbc-news,the-new-york-times,time,newsweek,daily-mail,associated-press&sortBy=relevancy";
+    $("#news").empty();
 
     $.ajax({
         url:newsUrl,
@@ -542,10 +595,17 @@ function getNews() {
             articleDiv.append(articleLink);
             $("#news").append(articleDiv);
         }
+        var attribution = $("<p>");
+        var attributionLink = $("<a>");
+        attributionLink.attr("href", "https://newsapi.org/");
+        attributionLink.text("Powered by News API");
+        attribution.html(attributionLink);
+        $("#news").append(attributionLink);
     });
 };
 
 function findEvents() {
+    $("#events").empty();
     //finding events with Eventbrite API
     var eventBriteApiKey = "FPKFWK7MH5W6AEHFNYXN";
     var eventBriteRestUrl = "https://www.eventbriteapi.com/v3/events/search/?token=" + eventBriteApiKey;
@@ -577,6 +637,12 @@ function findEvents() {
             eventDiv.append(eventLink);
             $("#events").append(eventDiv);
         }
+        var attribution = $("<p>");
+        var attributionLink = $("<a>");
+        attributionLink.attr("href", "https://www.eventbrite.com/developer/v3/");
+        attributionLink.text("Powered by Eventbrite API");
+        attribution.html(attributionLink);
+        $("#events").append(attributionLink);
     })
 };
 
