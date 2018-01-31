@@ -529,20 +529,16 @@ function getNews() {
             var articleHeader = $("<h4>");
             var articleSource = $("<p>");
             var articleDate = $("<p>");
-            var articleLink = $("<p>");
             var articleUrl = $("<a>");
             articleNumber = i + 1;
-            articleHeader.text(articleNumber + ". " + thisArticle.title);
             articleSource.text(thisArticle.source.name);
             articleDate.text(moment(thisArticle.publishedAt).format("L"));
             articleUrl.attr("href", thisArticle.url);
-            articleUrl.text("Find the full article here");
-            articleLink.html(articleUrl);
-            // var thisArticleNumber = i + 1;
+            articleUrl.text(articleNumber + ". " + thisArticle.title);
+            articleHeader.html(articleUrl);
             articleDiv.append(articleHeader);
             articleDiv.append(articleDate);
             articleDiv.append(articleSource);
-            articleDiv.append(articleLink);
             $("#news").append(articleDiv);
         }
     });
