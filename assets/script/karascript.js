@@ -213,7 +213,7 @@ function darkSky() {
 
         for (var i = 0; i < response.daily.data.length; i++) {
             // create a new div for each day of the week
-            var div = $("<div class='weatherdiv col-xs-6 col-sm-6 col-md-6 col-lg-3'>");
+            var div = $("<div class='weatherdiv col-xs-12 col-sm-6 col-md-6 col-lg-3'>");
             var weatherbox = $("<div class='weatherbox'>");
             
             // obtaining weather information
