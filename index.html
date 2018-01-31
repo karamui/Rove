@@ -1,116 +1,160 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Rove</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-    .row.content {height: 1500px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height: auto;} 
-    }
-  </style>
-<div class="jumbotron text-center">
-  <h1>Rove</h1> 
-  <form>
-  <div>
-    <input type="search" id="mySearch" name="q">
-    <button>Search</button>
-  </div>
-</form> 
-</div>
-</head>
-<body>
-<h4>Chicago</h4>
-<div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-3 sidenav">
-      <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#section1">Information</a></li>
-        <li><a href="#section2">Location</a></li>
-        <li><a href="#section3">Weather</a></li>
-        <li><a href="#section3">Languages</a></li>
-        <li><a href="#section3">Currency</a></li>
-        <li><a href="#section3">Alerts</a></li>
-        <li><a href="#section3">News</a></li>
-        <li class="active"><a href="#section2">Attractions</a></li>
-        <li><a href="#section3">Top Attractions</a></li>
-        <li><a href="#section4">Upcoming Events</a></li>
-        <li><a href="#section4">Tours</a></li>
-        <li class="active"><a href="#section3">Accomodations</a></li>
-        <li class="active"><a href="#section4">Food</a></li>
-        <li class="active"><a href="#section5">Transportation</a></li>
-        <li><a href="#section2">Public Transportation</a></li>
-        <li><a href="#section3">Taxis & Uber</a></li>
-        <li><a href="#section3">Rentals</a></li>
-        <li><a href="#section3">Parking & Traffic</a></li>
-        <li><a href="#section3">Routes</a></li>
-      </ul><br>
-          </button>
-        </span>
-      </div>
-    </div>
-    <div class="col-sm-9">
-      <p></p>
-      <br><br>
-      
-      <form role="form">
-        <div class="form-group">
-          <textarea class="form-control" rows="3" required></textarea>
-        </div>
-       
-      <br><br>
-     
-      <div class="row">
-        <div class="col-sm-2 text-center">
-         
-        </div>
-        <div class="col-sm-10">
-          <br>
-        </div>
-        <div class="col-sm-2 text-center">
-          
-        </div>
+<html lang="en-us">
 
-        <div class="col-sm-10">
-          <div class="row">
-            <div class="col-sm-2 text-center">
-            </div>
-            <div class="col-xs-10">
-          
-              <br>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<footer class="container-fluid">
-  <p>Footer Text</p>
-</footer>
-</body>
+	<head>
+		<title>Rove</title>
+		<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png"/>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- FONTS -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	</head>
+
+	<body>
+		<div class="container-fluid"> <!-- main content -->
+			<div class="row header"> <!-- header row -->
+				<div class="row"> <!-- mini logo -->
+					<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"> <!--logo -->
+						<img id="minilogo" class="img-responsive" alt="rove" src="assets/images/rove-white.png">
+					</div>
+					<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11"></div> <!--spacer -->
+				</div> <!-- mini logo row -->
+
+				<div class="row"> <!-- large logo -->
+					<div class="col-xs-2 col-sm-2 col-md-4 col-lg-4"></div> <!--spacer -->
+					<div class="col-xs-8 col-sm-8 col-md-4 col-lg-4"> <!--search -->
+						<div class="searchquery1"><img id="logo" class="img-responsive" alt="rove" src="assets/images/rove-white.png"></div>
+					</div>
+					<div class="col-xs-2 col-sm-2 col-md-4 col-lg-4"></div> <!--spacer -->
+				</div> <!-- large logo row -->
+
+				<div class="row"> <!-- search bar -->
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div> <!--spacer -->
+					<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 searchbar"> <!--search -->
+						<!-- REFERENCE: https://community.algolia.com/places/examples.html#disable-styling -->
+						<div id="input-styling-address">
+						  <input type="text" id="search-input" placeholder="Where would you like to go?">
+						  <button id="search"><img alt="GO" src="assets/images/search.png"></button>
+						</div>
+					</div>
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div> <!--spacer -->
+				</div> <!-- search row -->
+			</div> <!-- header row -->
+		</div> <!-- container-fluid -->
+
+		<div class="container">
+			<div class="row contents"> <!-- all contents -->
+				<div class="col-xs-0 col-sm-0 col-md-3 col-lg-3"> <!-- sidebar -->
+					<div class="sidebar">
+						<div class="sidebar1">
+							<div class="row"> <!-- search functions -->
+								<div class="searchquery2"><h2>Chicago</h2></div>
+								<button id="save">save search</button>
+								<button id="clear">clear searches</button>
+							</div> <!-- search functions -->
+
+							<div class="row"> <!-- saved searches -->
+								<div id="savedsearches"></div>
+							</div> <!-- saved searches row -->
+						</div> <!-- sidebar -->
+					
+						<div class="sidebar2">
+							<div class="row"> <!-- sidebar links -->
+								<h3>Information</h3>
+								<a class="navlink" href="#map">Location</a>
+								<a class="navlink" href="#weathertitle">Weather</a>
+								<a class="navlink" href="#languagetitle">Language(s)</a>
+								<a class="navlink" href="#currencytitle">Currency</a>
+								<a class="navlink" href="#alertstitle">Travel Advisories</a>
+								<a class="navlink" href="#newstitle">News</a>
+								<div class="sidebarspace"></div>
+								<h3>Attractions</h3>
+								<a class="navlink" href="#attractionstitle">Top Attractions</a>
+								<a class="navlink" href="#eventstitle">Upcoming Events</a>
+								<div class="sidebarspace"></div>
+								<h3><a class="navlink mainlink" href="#accommodationstitle">Accommodations</a></h3>
+								<div class="sidebarspace2"></div>
+								<h3><a class="navlink mainlink" href="#foodtitle">Food</a></h3>
+							</div>
+						</div>
+					</div>
+				</div> <!-- sidebar column -->
+
+				<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9"> <!-- main content -->
+					<div class="row main"> <!-- main content -->
+						<div class="row">
+							<div id="map"></div>
+						</div>
+
+						<div class="row">
+							<h2 id="weathertitle">Weather</h2>
+							<div id="weather"></div>
+						</div>
+
+						<div class="row">
+							<h2 id="languagetitle">Language(s)</h2>
+							<div id="language"></div>
+						</div>
+
+						<div class="row">
+							<h2 id="currencytitle">Currency</h2>
+							<div id="currency"></div>
+						</div>
+
+						<div class="row">
+							<h2 id="alertstitle">Travel Advisories</h2>
+							<div id="alerts"></div>
+						</div>
+
+						<div class="row">
+							<h2 id="newstitle">News</h2>
+							<div id="news"></div>
+						</div>
+
+						<div class="row">
+							<h2 id="attractionstitle">Top 10 Attractions</h2>
+							<div id="attractions"></div>
+						</div>
+
+						<div class="row">
+							<h2 id="eventstitle">Upcoming Events</h2>
+							<div id="events"></div>
+						</div>																		
+
+						<div class="row">
+							<h2 id="accommodationstitle">Top 10 Accommodations</h2>
+							<div id="hotels"></div>
+						</div>
+
+						<div class="row">
+							<h2 id="foodtitle">Top 10 Restaurants</h2>
+							<div id="food"></div>
+						</div>
+					</div> <!-- main content row -->
+
+					<div class="row"> <!-- credits -->
+						<p class="tiny">&copy; 2018 Maggie Alberts, Sarah Learner, Kara Mui, and Jason Payne.<br>Powered by Algolia Places, <a href="https://darksky.net/poweredby/">Dark Sky</a>, Eventbrite, Google Maps Geocoding, Google Maps JavaScript, Google News, Google Places, REST Countries, and TuGo. Icons by <a href="http://www.freepik.com">Freepik</a> and <a href="https://www.behance.net/heeyeun">Heeyeun Jeong</a>.</p>
+					</div> <!-- credits row -->
+				</div> <!-- main content column -->
+
+
+			</div> <!-- all contents row -->
+		</div> <!-- container -->
+
+		<!-- JAVASCRIPT AND JQUERY -->
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<script src="assets/script/matchheight.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/places.js@1.4.18"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeAKjHmJnKiguHVIoSB-YaqXkapD4g_4M&libraries=places&callback=googleMapsJavascript"></script>
+		<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+		<script src="assets/script/karascript.js"></script>
+	</body>
 </html>
