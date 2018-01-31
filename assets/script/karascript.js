@@ -178,6 +178,9 @@ function resetThenSearch() {
     // runs APIs
     googleMapsGeocoding();
     restCountries();
+    getNews();
+    findEvents();
+    updateImage();
 }
 
 // ------------------------------------ API FUNCTIONS
@@ -259,6 +262,13 @@ function darkSky() {
             div.append(weatherbox);
             $("#weather").append(div);    
         }
+        var weatherAttribution = $("<p>");
+        var weatherAttributionLink = $("<a>");
+        weatherAttributionLink.attr("href", "https://darksky.net/dev");
+        weatherAttributionLink.text("Powered by Dark Sky API");
+        weatherAttribution.html(weatherAttributionLink);
+        $("#weather").append("<br>");
+        $("#weather").append(weatherAttributionLink);
 
         // make height of weather divs equal in size
         $(".weatherbox").matchHeight({byRow: false, property: "height"});
@@ -389,13 +399,35 @@ function googlePlaces() {
     var googlePlaces_queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=" + googlePlaces_key + "&location=" + latitude + "," + longitude + "&radius=8047&rankby=prominence&type=point_of_interest";
 
     $("#hotels").empty();
+    $("#attractions").empty();
+    $("#food").empty();
 
     // attractions
+    var googlePlaces_key = "AIzaSyCDcpIf0iLXO9lC6dAQUWAuMyIJNpgFV7w";
+    var googlePlaces_queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=" + googlePlaces_key + "&location=" + latitude + "," + longitude + "&radius=8047&rankby=prominence&type=point_of_interest";
+
     $.ajax({
         url: googlePlaces_queryURL,
         method: "GET"
     }).done(function(response) {
+        $("#attractions").text("");
         console.log(response); // for debugging
+        for (i = 0; i < 10; i++) {
+            var thisPlace = response.results[i];
+            var placeDiv = $("<div>");
+            var placeName = $("<p>");
+            var itemNumber = i + 1;
+            placeName.text(itemNumber + ". " + thisPlace.name);
+            placeDiv.append(placeName);
+            $("#attractions").append(placeDiv);
+        }
+        var attractionsAttribution = $("<p>");
+        var attractionsAttributionLink = $("<a>");
+        attractionsAttributionLink.attr("href", "https://developers.google.com/places/");
+        attractionsAttributionLink.text("Powered by Google Places API");
+        attractionsAttribution.html(attractionsAttributionLink);
+        $("#attractions").append("<br>");
+        $("#attractions").append(attractionsAttributionLink);
     });
 
     // accomodations
@@ -416,6 +448,41 @@ function googlePlaces() {
             div.append("<p><b>" + (i+1) + ".</b> " + name + "</p>");
             $("#hotels").append(div);    
         }
+        var hotelAttribution = $("<p>");
+        var hotelAttributionLink = $("<a>");
+        hotelAttributionLink.attr("href", "https://developers.google.com/places/");
+        hotelAttributionLink.text("Powered by Google Places API");
+        hotelAttribution.html(hotelAttributionLink);
+        $("#hotels").append("<br>");
+        $("#hotels").append(hotelAttributionLink);
+    });
+
+    //restaurants
+    var googlePlaces_key = "AIzaSyCDcpIf0iLXO9lC6dAQUWAuMyIJNpgFV7w";
+    var googlePlaces_queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=" + googlePlaces_key + "&location=" + latitude + "," + longitude + "&radius=8047&rankby=prominence&type=restaurant";
+
+    $.ajax({
+        url: googlePlaces_queryURL,
+        method: "GET"
+    }).done(function(response) {
+        $("#food").text("");
+        console.log(response); // for debugging
+        for (i = 0; i < 10; i++) {
+            var thisRestaurant = response.results[i];
+            var restaurantDiv = $("<div>");
+            var restaurantName = $("<p>");
+            var itemNumber = i + 1;
+            restaurantName.text(itemNumber + ". " + thisRestaurant.name);
+            restaurantDiv.append(restaurantName);
+            $("#food").append(restaurantDiv);
+        }
+        var foodAttribution = $("<p>");
+        var foodAttributionLink = $("<a>");
+        foodAttributionLink.attr("href", "https://developers.google.com/places/");
+        foodAttributionLink.text("Powered by Google Places API");
+        foodAttribution.html(foodAttributionLink);
+        $("#food").append("<br>");
+        $("#food").append(foodAttributionLink);
     });
 }
 
@@ -423,6 +490,7 @@ function googlePlaces() {
 // obtain and display language and currency information
 function restCountries() {
     var restcountries_queryURL = "https://restcountries.eu/rest/v2/name/" + country;
+    var alpha2code;
 
     $.ajax({
         url: restcountries_queryURL,
@@ -438,6 +506,14 @@ function restCountries() {
         // convert language array to string and display it on page
         languages = languages.join(", ");
         $("#language").html(languages);
+        var languageAttribution = $("<p>");
+        var languageAttributionLink = $("<a>");
+        languageAttributionLink.attr("href", "https://restcountries.eu/rest/v2/");
+        languageAttributionLink.text("Powered by REST Countries API");
+        languageAttribution.html(languageAttributionLink);
+        $("#language").append("<br>");
+        $("#language").append(languageAttributionLink);
+
 
         // add currencies to array
         for(var i = 0; i < response[0].currencies.length; i++) {
@@ -447,5 +523,145 @@ function restCountries() {
         // convert currency array to string and display it on page
         currencies = currencies.join(", ");
         $("#currency").html(currencies);
+        var currencyAttribution = $("<p>");
+        var currencyAttributionLink = $("<a>");
+        currencyAttributionLink.attr("href", "https://restcountries.eu/rest/v2/");
+        currencyAttributionLink.text("Powered by REST Countries API");
+        currencyAttribution.html(currencyAttributionLink);
+        $("#currency").append("<br>");
+        $("#currency").append(currencyAttributionLink);
+
+        alpha2code = response[0].alpha2Code;
+
+        var tugoApiKey = "pxzuppxje7r2hsu2w3mpnaza";
+        var tugoRequestUrl = "https://api.tugo.com/v1/travelsafe/countries/" + alpha2code;
+        $("#alerts").empty();
+
+        $.ajax({
+            url: tugoRequestUrl,
+            method: "GET",
+            beforeSend: function(xhr){xhr.setRequestHeader('X-Auth-Api-Key', tugoApiKey);},
+        }).done(function(response) {
+            // console.log(response);
+            var alertsDiv = $("<div>");
+            var alertsInfo = $("<h>");
+            var alertsDetails = $("<p>");
+            alertsInfo.text(response.advisoryText);
+            alertsDetails.text(response.advisories.description);
+            alertsDiv.append(alertsInfo);
+            alertsDiv.append(alertsDetails);
+            $("#alerts").append(alertsDiv);
+            var attribution = $("<p>");
+            var attributionLink = $("<a>");
+            attributionLink.attr("href", "http://developer.tugo.com/");
+            attributionLink.text("Powered by TuGo API");
+            attribution.html(attributionLink);
+            $("#alerts").append(attributionLink);
+        });       
     });
+}
+
+function getNews() {
+    //finding related news articles
+    var newsApiKey = "37341660916741f38faa605269e8554f"
+    var newsUrl = 'https://newsapi.org/v2/everything?' + 'q=' + city + '&apiKey=' + newsApiKey + "&sources=abc-news,bbc-news,al-jazeera-english,le-monde,nbc-news,the-new-york-times,time,newsweek,daily-mail,associated-press&sortBy=relevancy";
+    $("#news").empty();
+
+    $.ajax({
+        url:newsUrl,
+        method: "GET"
+    }).done(function(response) {
+        console.log(response); //for debugging
+        //creates divs for first 10 articles with relevant info
+        for (i = 0; i < 10; i++) {
+            var thisArticle = response.articles[i];
+            var articleDiv = $("<div>");
+            var articleHeader = $("<h4>");
+            var articleSource = $("<p>");
+            var articleDate = $("<p>");
+            var articleLink = $("<p>");
+            var articleUrl = $("<a>");
+            articleNumber = i + 1;
+            articleHeader.text(articleNumber + ". " + thisArticle.title);
+            articleSource.text(thisArticle.source.name);
+            articleDate.text(moment(thisArticle.publishedAt).format("L"));
+            articleUrl.attr("href", thisArticle.url);
+            articleUrl.text("Find the full article here");
+            articleLink.html(articleUrl);
+            // var thisArticleNumber = i + 1;
+            articleDiv.append(articleHeader);
+            articleDiv.append(articleDate);
+            articleDiv.append(articleSource);
+            articleDiv.append(articleLink);
+            $("#news").append(articleDiv);
+        }
+        var attribution = $("<p>");
+        var attributionLink = $("<a>");
+        attributionLink.attr("href", "https://newsapi.org/");
+        attributionLink.text("Powered by News API");
+        attribution.html(attributionLink);
+        $("#news").append(attributionLink);
+    });
+};
+
+function findEvents() {
+    $("#events").empty();
+    //finding events with Eventbrite API
+    var eventBriteApiKey = "FPKFWK7MH5W6AEHFNYXN";
+    var eventBriteRestUrl = "https://www.eventbriteapi.com/v3/events/search/?token=" + eventBriteApiKey;
+    var searchUrl = eventBriteRestUrl + "&location.address=" + city + "&sort_by=date";
+
+    $.ajax({
+        url: searchUrl,
+        method: "GET"
+    }).done(function(response) {
+        console.log(response); //for debugging
+        //for loop to format important data on first 10 events into divs and print to the events div
+        for (i = 0; i < 10; i++) {
+            var thisEvent = response.events[i];
+            var eventDiv = $("<div>");
+            var eventHeader = $("<h4>");
+            var eventDates = $("<p>");
+            var eventLink = $("<p>");
+            var eventUrl = $("<a>");
+            var prettyStart = moment(thisEvent.start.local).format("L LT");
+            var prettyEnd = moment(thisEvent.end.local).format("L LT");
+            var eventNumber = i + 1;
+            eventHeader.text(eventNumber + ". " + thisEvent.name.text);
+            eventDates.text(prettyStart + " - " + prettyEnd);
+            eventUrl.attr("href", thisEvent.url);
+            eventUrl.text("More information on this event");
+            eventLink.html(eventUrl);
+            eventDiv.append(eventHeader);
+            eventDiv.append(eventDates);
+            eventDiv.append(eventLink);
+            $("#events").append(eventDiv);
+        }
+        var attribution = $("<p>");
+        var attributionLink = $("<a>");
+        attributionLink.attr("href", "https://www.eventbrite.com/developer/v3/");
+        attributionLink.text("Powered by Eventbrite API");
+        attribution.html(attributionLink);
+        $("#events").append(attributionLink);
+    })
+};
+
+function updateImage() {
+    //updating background image with flickr api
+    var flickrApiKey = "f555b1104a9e5c75a95381117926837d";
+    var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + flickrApiKey + "&text=" + city + "&format=json&nojsoncallback=1&sort=relevance&accuracy=~11&content_type=1&is_getty=true";
+
+    $.ajax({
+        url: flickrUrl,
+        method: "GET",
+    }).done(function(response) {
+        // console.log(response);
+        var thisPhoto = response.photos.photo[0];
+        var photoId = thisPhoto.id;
+        var photoServerId = thisPhoto.server;
+        var photoFarmId = thisPhoto.farm;
+        var photoSecret = thisPhoto.secret;
+        var photoUrl = "https://farm" + photoFarmId +".staticflickr.com/" + photoServerId + "/" + photoId + "_" + photoSecret + ".jpg"
+        $(".header").css("background-image", "url(" + photoUrl + ")");
+    })
 }
