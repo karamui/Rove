@@ -115,17 +115,17 @@ $(document).on("click", "#submit", function() {
 		});
     });
 
-    var shutterstockSecret = "077ed-f33ea-911d0-6c4b6-6a3fd-2728b";
-	var shutterstockApiKey = "33dca-36dcd-b5a54-7196a-f2c34-f6ffd";
-	var shutterstockUrl = "https://$" + shutterstockApiKey + ":$" + shutterstockSecret + "@api.shutterstock.com/v2/images/search?query=" + city;
+ //    var shutterstockSecret = "077ed-f33ea-911d0-6c4b6-6a3fd-2728b";
+	// var shutterstockApiKey = "33dca-36dcd-b5a54-7196a-f2c34-f6ffd";
+	// var shutterstockUrl = "https://$" + shutterstockApiKey + ":$" + shutterstockSecret + "@api.shutterstock.com/v2/images/search?query=" + city;
 
-	$.ajax({
-		url: shutterstockUrl,
-		method: "GET",
-		// beforeSend: function(xhr){xhr.setRequestHeader('Access-Control-Allow-Origin', true);}
-	}).done(function(response) {
-		console.log(response);
-	})
+	// $.ajax({
+	// 	url: shutterstockUrl,
+	// 	method: "GET",
+	// 	// beforeSend: function(xhr){xhr.setRequestHeader('Access-Control-Allow-Origin', true);}
+	// }).done(function(response) {
+	// 	console.log(response);
+	// })
 
     // CORS
 	jQuery.ajaxPrefilter(function(options) {
@@ -167,19 +167,8 @@ $(document).on("click", "#submit", function() {
       		  		var placeDiv = $("<div>");
       		  		var placeName = $("<h3>");
       		  		var placeImgDiv = $("<div>");
-      		  		// var placeImg;
-      		  		// var photoreference = thisPlace.photos[0].photo_reference;
-      		  		// var getPhotoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + photoreference + "&key=AIzaSyAi8QzCfvgLn-uD09gfLyruxkYQmQRgwRs"
-      		  		// $.ajax({
-      		  		// 	url: getPhotoUrl,
-      		  		// 	method: "GET"
-      		  		// }).done(function(response) {
-      		  		// 	placeImg = response;
-      		  		// })
-      		  		// placeImgDiv.html(placeImg);
       		  		var itemNumber = i + 1;
       		  		placeName.text(itemNumber + ": " + thisPlace.name);
-      		  		// placeDiv.append(placeImgDiv);
       		  		placeDiv.append(placeName);
       		  		$("#attractions").append(placeDiv);
       		  	}
@@ -188,21 +177,21 @@ $(document).on("click", "#submit", function() {
 	});
 
 	//updating background image with flickr api
-	// var flickrApiKey = "f555b1104a9e5c75a95381117926837d";
-	// var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + flickrApiKey + "&text=" + city + "&format=json&nojsoncallback=1&sort=relevance&accuracy=~11&content_type=1&is_getty=true";
+	var flickrApiKey = "f555b1104a9e5c75a95381117926837d";
+	var flickrUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + flickrApiKey + "&text=" + city + "&format=json&nojsoncallback=1&sort=relevance&accuracy=~11&content_type=1&is_getty=true";
 
-	// $.ajax({
-	// 	url: flickrUrl,
-	// 	method: "GET",
-	// }).done(function(response) {
-	// 	// console.log(response);
-	// 	var thisPhoto = response.photos.photo[0];
-	// 	var photoId = thisPhoto.id;
-	// 	var photoServerId = thisPhoto.server;
-	// 	var photoFarmId = thisPhoto.farm;
-	// 	var photoSecret = thisPhoto.secret;
-	// 	var photoUrl = "https://farm" + photoFarmId +".staticflickr.com/" + photoServerId + "/" + photoId + "_" + photoSecret + ".jpg"
-	// 	$("#city_image").attr("src", photoUrl);
-	// })
+	$.ajax({
+		url: flickrUrl,
+		method: "GET",
+	}).done(function(response) {
+		// console.log(response);
+		var thisPhoto = response.photos.photo[0];
+		var photoId = thisPhoto.id;
+		var photoServerId = thisPhoto.server;
+		var photoFarmId = thisPhoto.farm;
+		var photoSecret = thisPhoto.secret;
+		var photoUrl = "https://farm" + photoFarmId +".staticflickr.com/" + photoServerId + "/" + photoId + "_" + photoSecret + ".jpg"
+		$("#city_image").attr("src", photoUrl);
+	})
 
 });
