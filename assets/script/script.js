@@ -55,6 +55,7 @@ var search = "Chicago, IL, United States of America";
 var savedsearches = [""];
 var cities = [""];
 var countries = [""];
+var dontrun = true;
 
 // initially hide option to save search
 $("#save").hide();
@@ -180,7 +181,12 @@ function resetThenSearch() {
     restCountries();
     getNews();
     findEvents();
-    updateImage();
+
+    if (dontrun == false) {
+    	updateImage();
+    } else {
+    	dontrun = false;
+    }
 }
 
 // ------------------------------------ API FUNCTIONS
