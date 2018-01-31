@@ -271,7 +271,7 @@ div.sidebarspace2 {
 
 /* ------------------------------------ WEATHER */
 
-#weather, #language, #currency, #hotels, #food  {
+#weather, #language, #currency, #alerts, #news, #attractions, #events, #hotels, #food  {
 	margin-bottom: 25px;
 	width: 100%;
 }
