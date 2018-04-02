@@ -1,6 +1,5 @@
 # Rove
-
-This app was created by Maggie Alberts, Sarah Learner, Kara Mui, and Jason Payne.
+An interactive, fully-responsive travel website which accepts user input and returns a variety of pertinent information. This application was created by Maggie Alberts, Sarah Learner, Kara Mui, and Jason Payne.
 
 Rove is a single-page web application that finds relevant travel and tourism information about a city of the user's choosing. It utilizes multiple public API's to retrieve any data that a user may want to know about a city, such as what language is spoken there, what currency is used, what the weather is like, what the most popular attractions are, and what events are happening in the city.
 
